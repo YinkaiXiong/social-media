@@ -1,0 +1,130 @@
+.container{
+  display: flex;
+  flex-direction: column;
+	justify-content: center;
+	align-items: center;
+  /* background-color: #47B5FF; */
+  height: 75vh;
+}
+
+.pageName{
+  text-align: center;
+}
+
+.form-container{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; 
+  background-color: #47B5FF;
+  width: 20vw;
+  height: 60vh;
+  border-radius: 20px;
+}
+
+.form-container form{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.form-fields{
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  border-radius: 20px;
+  gap: 0.5em;
+  padding: 0.5em 6em;
+  margin-bottom: 2rem;
+  
+}
+
+.form-fields label{
+  font-size: 1.1em;
+  margin-left: -3em;
+}
+
+.form-fields input{
+  font-size: 0.9em;
+  height: 1.5em;
+  margin-left: -3.5em;
+}
+
+.form-container input{
+  border: none;
+  outline: none;
+}
+
+.formBtn{
+  /* border: none;
+  border-radius: 20px;
+  height: 1.8rem;
+  text-align: center;
+  width: 12vw; */
+  padding: 1em 4em;
+  color: white;
+  background-color: #1363DF;
+  margin-bottom: 1rem;
+  border-radius: 20px;
+  border: none;
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.formBtn:hover{
+  background-color: rgba(19, 99, 223, 0.7);
+}
+
+.oauthSection{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.oauthBtn-container{
+  display: flex;
+  flex-direction: row;
+  padding: 1rem;
+}
+
+.oauthBtns{
+  height: 50px;
+  width: 50px;
+  /* border: 1px solid white; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 25px;
+  margin: 0 1.5rem;
+  background-color: white;
+  border-radius: 15px;
+  padding-top: 0.2rem;
+}
+
+.oauthBtns:hover{
+  background-color: rgba(255, 255, 255, 0.8);
+  cursor: pointer;
+}
+
+.footer{
+  position: relative;
+  width: 85%;
+  height: 10%;
+  margin-bottom: -3rem;
+}
+.forget-password{
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+
+.errorMSG{
+  color: #fecc00;
+  font-weight: 500;
+  font-size: 1.1rem;
+  padding: 0 0.5rem;
+}
+
+

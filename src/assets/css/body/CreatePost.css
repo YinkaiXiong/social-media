@@ -1,0 +1,112 @@
+.createPost-container{
+  width: 50%;
+  /* min-height: 16vh; */
+  height: auto;
+  margin: 1rem;
+  display: flex;
+  background-color: white;
+  border-radius: 20px;
+}
+.createPost-left{
+  width: 18%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.createPost-avatar{
+  width: 50px;
+  height: 50px;
+  padding-top: 1.3rem;
+}
+.createPost-avatar a:hover{
+  cursor: pointer;
+}
+
+
+.createPost-avatar img{
+  max-width: 100%;
+  max-height: 100%;
+  border-radius: 20px;
+  object-fit: fill;
+}
+
+.createPost-right{
+  width: 80%;
+}
+
+.dividing-line{
+  border-top: 1px solid #ccc;
+  width: 70%;
+}
+
+.createPost-right form{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 1rem;
+}
+
+.createPost-right form textarea{
+  outline: none;
+  border: none;
+  resize: none;
+  font-size: 1.2rem;
+  background-color: #f2f3f5;
+  border-radius: 20px;
+  height: auto;
+  padding: 1rem;
+  width: 90%;
+  /* max-height: 30px; */
+}
+
+.createPost-right-top{
+  width: 100%;
+  
+}
+
+.createPost-right-bot{
+  width: 70%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+
+.createPost-right-bot input[type="file"]{
+  display: none;
+}
+
+.createPost-input-container{
+  display: flex;
+  align-items: flex-start;
+  width: 60%;
+}
+
+.createPost-button-container{
+  display: flex;
+  justify-content: flex-end;
+  width: 40%;
+}
+
+.custom_img_upload {
+  padding: 6px 12px;
+  cursor: pointer;
+  border: 1px solid #ccc;
+}
+
+.createPost-right-bot button{
+  padding: 1.5em 4em;
+  color: white;
+  background-color: #1363DF;
+  border-radius: 20px;
+  border: none;
+  font-weight: 600;
+  font-size: 0.5rem;
+}
+
+.createPost-right-bot button:hover{
+  background-color: #47B5FF;
+}

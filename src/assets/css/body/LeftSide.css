@@ -1,0 +1,46 @@
+.Left-side {
+  flex-grow: 1;
+  max-width: 20%;
+  min-width: 20%;
+}
+
+.left-side-container {
+  padding: 1.5rem;
+  max-height: 10rem;
+  position: sticky;
+  top: 10rem;
+}
+
+.left-side-nav-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  list-style: none;
+}
+
+.left-side-nav-listItem {
+  display: flex;
+  flex-direction: row;
+  padding: 0.8rem 2rem;
+  margin-bottom: 0.5rem;
+  border-radius: 25px;
+  font-size: 1.4rem;
+  color: #06283d;
+  gap: 1rem;
+}
+
+.left-side-nav-listItem:hover {
+  cursor: pointer;
+  background-color: #d2d4d6;
+}
+
+.left-side-nav-listItem-text {
+  padding-left: 0.5rem;
+  text-decoration: none;
+}
+:visited {
+  color: #06283d;
+}
+:link {
+  color: #06283d;
+}

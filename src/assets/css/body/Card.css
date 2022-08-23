@@ -1,0 +1,143 @@
+.card-container{
+  min-width: 50%;
+  max-width: 50%;
+  height: auto;
+  margin: 0.5rem 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: white;
+  border-radius: 20px;
+}
+
+.containers{
+  width: 90%;
+  height: auto;
+  margin: 0.1rem 0;
+}
+
+.card-top{
+  width: 90%;
+  height: auto;
+  margin-top: 1rem;
+  margin-bottom: 0.3rem;
+  display: flex;
+}
+
+.card-top-left{
+  width: 10%;
+}
+
+.card-avatar{
+  width: 50px;
+  height: 50px;
+}
+
+.card-avatar img{
+  max-width: 100%;
+  max-height: 100%;
+  border-radius: 20px;
+}
+
+.card-top-center{
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  padding-left: 1rem;
+}
+
+.card-postUserName{
+  padding-top: 1rem;
+}
+
+.card-postUserName a{
+  text-decoration: none;
+  color: gray;
+  font-size: 1.2rem;
+}
+
+.card-postUserName a:hover{
+  text-decoration: underline;
+
+}
+
+.card-top-right{
+  width: 10%;
+}
+
+.card-content {
+  font-size: 1.2rem;
+}
+
+.card-content button{
+  border: none;
+  background-color: white;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 1.1rem;
+  padding-left: 0.3rem;
+}
+
+.card-content button:hover{
+  text-decoration: underline;
+}
+
+.card-image-container img{
+  max-width: 100%;
+  max-height: 40vh;
+  border-radius: 20px;
+}
+
+.card-btn-container{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.card-btn{
+  width: 50%;
+  text-align: center;
+  padding: 0.5rem;
+  margin: 0.1rem;
+  border-radius: 20px;
+  font-size: 1.1rem;
+}
+
+.card-btn:hover{
+  cursor: pointer;
+  background-color: gainsboro;
+}
+
+.card-comment-container form{
+/*   border: 1px solid black; */
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  padding: 0.5rem 0;
+}
+
+.card-comment-container input{
+  padding: 0.5rem;
+  width: 65%;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+}
+
+.card-comment-container button{
+  width: 25%;
+  padding: 1rem;
+  border-radius: 20px;
+  border: none;
+  background-color: #1363DF;
+  color: white;
+  font-weight: 600;
+  font-size: 0.5rem;
+}
+
+/* 
+
+
+.card-bot{
+
+} */

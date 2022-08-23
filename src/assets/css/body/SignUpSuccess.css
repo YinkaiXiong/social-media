@@ -1,0 +1,32 @@
+.SignUpSuccess-container{
+  display: flex;
+  height: 80vh;
+  align-items: center;
+  justify-content: center;
+
+}
+
+.SignUpSuccess-logo{
+  font-size: 5rem;
+  margin: 1rem;
+  margin-top: 2rem;
+  color: green;
+}
+
+.SignUpSuccess-Heading{
+  font-size: 3rem;
+  font-weight: 900;
+  margin: 1rem;
+  color: #06283D;
+}
+
+.SignUpSuccess-Message{
+  font-size: 1.4rem;
+  margin: 1rem;
+  color: #06283D;
+}
+
+.SignUpSuccess-Message a{
+  font-size: 1rem;
+  padding-left: 0.5rem;
+}

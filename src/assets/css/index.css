@@ -1,0 +1,18 @@
+/*https://colorhunt.co/palette/06283d1363df47b5ffdff6ff  color combination*/
+*{
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto', sans-serif;
+
+}
+body{
+  background-color: #DFF6FF;
+  width: 100%;
+  
+}
+
+.bodyContainer{
+  display: flex;
+  width: 100%;
+  
+}
