@@ -7,9 +7,17 @@ const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const FacebookStrategy = require("passport-facebook");
 const bcrypt = require("bcrypt");
 const cors = require("cors");
+const cloudinary = require("cloudinary").v2;
 const dotenv = require("dotenv");
 dotenv.config({ path: "../.env" });
 
+//Cloudinary config. Set secure: true to receive https URLs
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+  secure: true,
+});
 //model imports
 const User = require("./models/User");
 const Post = require("./models/Post");
@@ -20,7 +28,7 @@ const app = express();
 let authorizedUser = null;
 
 //Middleware
-app.use(bodyParser.json());
+app.use(bodyParser.json({ limit: "10mb" }));
 app.use(cors());
 app.use(express.static("public"));
 
@@ -238,7 +246,7 @@ app.put("/users/:id", async (req, res) => {
     }
 
     try {
-      const user = await User.findByIdAndUpdate(req.params.id, {
+      await User.findByIdAndUpdate(req.params.id, {
         $set: req.body,
       });
       res.status(200).json("Password changed successful.");
@@ -317,15 +325,26 @@ app.get("/posts/:id", async (req, res) => {
 
 //Create a post
 app.post("/posts/create", async (req, res) => {
-  const newPost = new Post(req.body);
-  console.log(req.body);
-  res.json(newPost);
-  /*try {
+  //Use cloudinary to convert image base64 url to online https url
+  let imageURL;
+  if (req.body.imageFile !== "") {
+    const result = await cloudinary.uploader.upload(req.body.imageFile);
+    imageURL = result.secure_url;
+  } else {
+    imageURL = "";
+  }
+
+  const newPost = new Post({
+    userId: req.body.userId,
+    postContent: req.body.postContent,
+    imgURL: imageURL,
+  });
+  try {
     const savedPost = await newPost.save();
     res.status(200).json(savedPost);
   } catch (error) {
-    res.status(500).json(error);
-  }*/
+    res.status(500).json({ error: error });
+  }
 });
 
 //Delete a post

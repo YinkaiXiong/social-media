@@ -3,8 +3,11 @@ import "../../assets/css/body/CreatePost.css";
 import TextareaAutosize from "react-textarea-autosize";
 import axios from "axios";
 import UserContext from "../../Contexts/UserContext";
+import { FileEarmarkImage, FileEarmarkImageFill } from "react-bootstrap-icons";
+import { useNavigate } from "react-router-dom";
 
 const CreatePost = () => {
+  const navigate = useNavigate();
   const { user } = useContext(UserContext);
   const [formData, setFormData] = useState({
     postContent: "",
@@ -14,7 +17,7 @@ const CreatePost = () => {
   const convertBase64 = (file, callback) => {
     const reader = new FileReader();
     reader.onload = function (e) {
-      //console.log(e.target.result);
+      //pass result to callback function
       callback(e.target.result);
     };
 
@@ -26,6 +29,8 @@ const CreatePost = () => {
   const handleChange = (event) => {
     const { name, value, files } = event.target;
 
+    //Use this as callback function to get the fileReader's result.
+    //Because the reader.onload is unable to assign result to a variable
     const setImageToFormData = (result) => {
       setFormData((prevState) => {
         return {
@@ -34,25 +39,17 @@ const CreatePost = () => {
         };
       });
     };
-    convertBase64(files[0], setImageToFormData);
-    /*const { name, value, files } = event.target;
-    setFormData(async (prevState) => {
-      if (name === "imageFile") {
-        const result = await convertBase64(files[0]);
-        console.log(result);
-        return {
-          postContent: prevState.postContent,
-          imageFile: result,
-        };
-      } else if (name === "postContent") {
+
+    if (name === "imageFile") {
+      convertBase64(files[0], setImageToFormData);
+    } else if (name === "postContent") {
+      setFormData((prevState) => {
         return {
           postContent: value,
           imageFile: prevState.imageFile,
         };
-      }
-    });*/
-    /*console.log(event);
-    console.log(event.target);*/
+      });
+    }
   };
 
   console.log(formData);
@@ -60,13 +57,16 @@ const CreatePost = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await axios.post("/posts/create", {
+      await axios.post("/posts/create", {
         userId: user._id,
         postContent: formData.postContent,
         imageFile: formData.imageFile,
       });
-      console.log(response);
-      console.log(user);
+      setFormData({
+        postContent: "",
+        imageFile: "",
+      });
+      navigate("/", { replace: true });
     } catch (error) {
       console.log(error);
     }
@@ -76,7 +76,7 @@ const CreatePost = () => {
     <div className="createPost-container">
       <div className="createPost-left">
         <div className="createPost-avatar">
-          <a>
+          <a href={"/Profile"}>
             <img src="/images/avatar_test.webp" alt="Avatar" />
           </a>
         </div>
@@ -98,10 +98,15 @@ const CreatePost = () => {
           <div className="createPost-right-bot">
             <div className="createPost-input-container">
               <label htmlFor="img_upload" className="custom_img_upload">
-                <img
+                {/*<img
                   src="https://img.icons8.com/material-rounded/24/000000/upload--v1.png"
                   alt="Upload images"
-                />
+                />*/}
+                {formData.imageFile === "" ? (
+                  <FileEarmarkImage />
+                ) : (
+                  <FileEarmarkImageFill />
+                )}
               </label>
               <input
                 id="img_upload"
