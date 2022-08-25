@@ -258,6 +258,32 @@ app.put("/users/:id", async (req, res) => {
   }
 });
 
+//Update user's profile picture
+app.post("/users/updateAvatar", async (req, res) => {
+  let imageURL;
+  if (req.body.imageFile !== "") {
+    const result = await cloudinary.uploader.upload(req.body.avatarFile);
+    imageURL = result.secure_url;
+    try {
+      const user = await User.findByIdAndUpdate(
+        req.body.userId,
+        {
+          profilePicture: imageURL,
+        },
+        { new: true }
+      );
+      const { password, updatedAt, ...other } = user._doc;
+      authorizedUser = other;
+      res.status(200).json(authorizedUser);
+    } catch (error) {
+      console.log(error);
+      res.json(error);
+    }
+  } else {
+    imageURL = "";
+  }
+});
+
 //Delete a user
 app.delete("/users/:id", async (req, res) => {
   console.log(req.body);
@@ -340,10 +366,10 @@ app.post("/posts/create", async (req, res) => {
     imgURL: imageURL,
   });
   try {
-    const savedPost = await newPost.save();
-    res.status(200).json(savedPost);
+    await newPost.save();
+    res.status(200).json("Create post successfully.");
   } catch (error) {
-    res.status(500).json({ error: error });
+    res.status(500).json(error);
   }
 });
 

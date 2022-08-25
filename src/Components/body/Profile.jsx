@@ -1,34 +1,91 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import UserContext from "../../Contexts/UserContext";
 import "../../assets/css/body/Profile.css";
 import data from "../../assets/postData";
 import Card from "./Card";
 import { Gear, House, Person } from "react-bootstrap-icons";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const Profile = () => {
-  //const { addCurrentUser, user } = useContext(UserContext);
+  const { addCurrentUser, user } = useContext(UserContext);
+  const [avatarFile, setAvatarFile] = useState("");
+  const navigate = useNavigate();
+
+  //Check if the user is logged in, if not send to Log in page
+  useEffect(() => {
+    (async function fetchData() {
+      const response = await axios.get("/isAuth");
+      if (response) {
+        if (response.data === null) {
+          navigate("/LogIn", { replace: true });
+        } else {
+          addCurrentUser(response.data);
+        }
+      }
+    })();
+  }, []);
+  console.log(user);
+  //When avatarFile changes, send the file to server and upload to DB
+  useEffect(() => {
+    if (avatarFile !== "") {
+      (async () => {
+        try {
+          const response = await axios.post("/users/updateAvatar", {
+            userId: user._id,
+            avatarFile: avatarFile,
+          });
+          addCurrentUser(response.data);
+          console.log(response.data);
+        } catch (error) {
+          console.log(error);
+        }
+        //navigate("/Profile", { replace: true });
+      })();
+    }
+  }, [avatarFile]);
+
+  const convertBase64 = (file, callback) => {
+    const reader = new FileReader();
+    reader.onload = function (e) {
+      //pass result to callback function
+      callback(e.target.result);
+    };
+    if (file) {
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const handleChange = async (event) => {
+    const getAvatarBase64 = (result) => {
+      setAvatarFile(result);
+    };
+    convertBase64(event.target.files[0], getAvatarBase64);
+  };
   return (
-    /*<div className={"body-container"}>
-      <div className={"profile-container"}>
-        <div className={"profile-header"}>
-          <div className={"profile-avatar-container"}>
-            <img src="/images/avatar2.jpg" alt={"User profile avatar"} />
-          </div>
-        </div>
-        <div className={"profile-userInfo"}>
-          <div className={"profile-name"}>Name</div>
-        </div>
-      </div>
-    </div>*/
     <div className={"body-container"}>
       <div className={"profile-header"}>
         <div className={"profile-avatar-container"}>
-          <img src="/images/avatar2.jpg" alt={"User profile avatar"} />
+          <label htmlFor={"avatarFile"}>Change</label>
+          <input
+            id="avatarFile"
+            name={"avatarFile"}
+            type="file"
+            accept=".png,.jpeg,.jpg, .webp"
+            onChange={handleChange}
+          />
+          <img
+            src={
+              user.profilePicture === "" || user.profilePicture === undefined
+                ? "/images/default_avatar.png"
+                : user.profilePicture
+            }
+            alt={"User profile avatar"}
+          />
         </div>
         <div className={"profile-userInfo"}>
-          <h1>Test User Name</h1>
-          <p>Joined at 2022</p>
+          <h1>{user.username}</h1>
+          <p>Joined in {user.createdAt.substring(0, 4)}</p>
           <div
             style={{
               display: "flex",
@@ -36,8 +93,8 @@ const Profile = () => {
               justifyContent: "space-between",
             }}
           >
-            <p>10 Followings </p>
-            <p>5 Follower</p>
+            <p>{user.followings.length} Followings </p>
+            <p>{user.followers.length} Follower</p>
           </div>
         </div>
       </div>
