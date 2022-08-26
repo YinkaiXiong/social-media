@@ -91,11 +91,13 @@ passport.use(
         if (err) {
           return cb(err);
         }
+        console.log(profile);
         if (!result) {
+          const imgURL = profile.photos[0].value.replace("s96-c", "s300-c");
           const user = await User.create({
             email: profile.emails[0].value,
             username: profile.displayName,
-            profilePicture: profile.photos[0].value,
+            profilePicture: imgURL,
             googleId: profile.id,
           });
           return cb(null, user);
@@ -117,7 +119,13 @@ app.get(
   passport.authenticate("google", { failureRedirect: "/auth/failed" }),
   function (req, res) {
     // Successful authentication, redirect home.
-    authorizedUser = req.session.passport.user;
+    User.findById(req.session.passport.user._id, (error, data) => {
+      if (error) {
+        console.log(error);
+      } else {
+        authorizedUser = data;
+      }
+    });
     res.redirect("http://localhost:3000");
   }
 );
@@ -135,7 +143,7 @@ passport.use(
       clientID: process.env.FACEBOOK_APP_ID,
       clientSecret: process.env.FACEBOOK_APP_SECRET,
       callbackURL: "http://localhost:8080/auth/facebook/callback",
-      profileFields: ["id", "emails", "name", "photos"],
+      profileFields: ["id", "emails", "name", "picture.type(large)"],
     },
     async function (accessToken, refreshToken, profile, cb) {
       User.findOne({ facebookId: profile.id }, async (err, result) => {
@@ -143,7 +151,6 @@ passport.use(
           return cb(err);
         }
         if (!result) {
-          console.log(profile);
           const user = await User.create({
             email: profile.emails[0].value,
             username:
@@ -172,9 +179,14 @@ app.get(
   passport.authenticate("facebook", { failureRedirect: "/auth/failed" }),
   function (req, res) {
     // Successful authentication, redirect home.
-    authorizedUser = req.session.passport.user;
+    User.findById(req.session.passport.user._id, (error, data) => {
+      if (error) {
+        console.log(error);
+      } else {
+        authorizedUser = data;
+      }
+    });
     res.redirect("http://localhost:3000");
-    console.log(authorizedUser);
   }
 );
 

@@ -25,7 +25,7 @@ const Profile = () => {
       }
     })();
   }, []);
-  console.log(user);
+
   //When avatarFile changes, send the file to server and upload to DB
   useEffect(() => {
     if (avatarFile !== "") {
@@ -40,7 +40,6 @@ const Profile = () => {
         } catch (error) {
           console.log(error);
         }
-        //navigate("/Profile", { replace: true });
       })();
     }
   }, [avatarFile]);
@@ -62,6 +61,9 @@ const Profile = () => {
     };
     convertBase64(event.target.files[0], getAvatarBase64);
   };
+
+  if (!user) return <div>Loading</div>;
+
   return (
     <div className={"body-container"}>
       <div className={"profile-header"}>
@@ -81,6 +83,7 @@ const Profile = () => {
                 : user.profilePicture
             }
             alt={"User profile avatar"}
+            referrerPolicy="no-referrer"
           />
         </div>
         <div className={"profile-userInfo"}>

@@ -63,7 +63,6 @@ const SignUp = () => {
     <div>
       <h1 className="pageName">SignUp page</h1>
       <div className="container">
-        <p>{user.email === undefined ? "null" : user.email}</p>
         <div className="form-container">
           {errorMessage == null ? (
             ""
