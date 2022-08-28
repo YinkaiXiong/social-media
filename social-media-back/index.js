@@ -191,6 +191,7 @@ app.get(
 );
 
 /************  Normal authentication *****************/
+// User register
 app.post("/auth/register", async (req, res) => {
   try {
     //hash password
@@ -214,6 +215,7 @@ app.post("/auth/register", async (req, res) => {
   }
 });
 
+//User Login
 app.post("/auth/login", async (req, res) => {
   try {
     //Find the user by email
@@ -241,6 +243,9 @@ app.post("/auth/login", async (req, res) => {
     res.status(500).json(error);
   }
 });
+
+//User Log out
+app.get("/auth/logout");
 
 /*************** End Authentication Section ***********/
 

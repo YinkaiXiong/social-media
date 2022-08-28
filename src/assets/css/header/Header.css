@@ -1,58 +1,59 @@
 .header {
-  background-color: #06283D;
+  background-color: #06283d;
   text-align: center;
   padding: 20px;
   font-size: 20px;
   display: grid;
-  grid-template-columns: 10% 70% 20% ;
+  grid-template-columns: 10% 70% 20%;
   height: 50px;
   position: sticky;
   top: 0;
 }
 
-.grid-item{
+.grid-item {
   padding: 10px;
   color: white;
   text-align: center;
-/*   border: white 1px solid; */
+  /*   border: white 1px solid; */
 }
 
-.headerInput{
+.headerInput {
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
   justify-content: flex-start;
+  height: 4vh;
 }
 
-.headerInput form{
+.headerInput form {
   display: flex;
   flex-direction: row;
-/*   border: white 1px solid; */
-  width: 160%;
-  height: 120%;
+  /*   border: white 1px solid; */
+  width: 100%;
+  height: 100%;
 }
 
-.headerInput form input{
-  width: 80%;
+.headerInput form input {
+  width: 15vw;
   border-radius: 20px 0 0 20px;
   text-indent: 15px;
   border: 0;
   outline: none;
 }
 
-.headerInput form button{
-  width: 20%;
+.headerInput form button {
+  width: 3vw;
   border-radius: 0 20px 20px 0;
   color: white;
-  background-color: #1363DF;
+  background-color: #1363df;
   border: 0;
 }
 
-.headerInput form button:hover{
-  background-color: #47B5FF;
+.headerInput form button:hover {
+  background-color: #47b5ff;
 }
 
-.btnContainer{
+.btnContainer {
   height: 110%;
   display: flex;
   justify-content: flex-end;
@@ -62,17 +63,17 @@
   width: 30%;
   border-radius: 20px;
   color: white;
-  background-color: #1363DF;
+  background-color: #1363df;
   border: 0;
-  height: 120%;
+  /*height: 100%;*/
   margin-left: 10px;
   text-decoration: none;
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 0.4rem;
 }
 
-.authBtn:hover{
-  background-color: #47B5FF;
+.authBtn:hover {
+  background-color: #47b5ff;
 }
-

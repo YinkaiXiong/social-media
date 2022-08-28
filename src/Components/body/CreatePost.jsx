@@ -112,7 +112,7 @@ const CreatePost = () => {
                 id="img_upload"
                 name={"imageFile"}
                 type="file"
-                accept=".png,.jpeg,.jpg"
+                accept=".png,.jpeg,.jpg,.webp"
                 onChange={handleChange}
               />
             </div>
