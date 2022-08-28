@@ -28,7 +28,7 @@ const app = express();
 let authorizedUser = null;
 
 //Middleware
-app.use(bodyParser.json({ limit: "10mb" }));
+app.use(bodyParser.json({ limit: "6mb" }));
 app.use(cors());
 app.use(express.static("public"));
 
@@ -245,7 +245,25 @@ app.post("/auth/login", async (req, res) => {
 });
 
 //User Log out
-app.get("/auth/logout");
+app.post("/auth/logout", (req,res)=>{
+  try {
+    if(req.body.user === authorizedUser.userId) {
+      authorizedUser = null;
+      req.logout((error)=>{
+        if(error){
+          console.log(error);
+        }
+      });
+      res.status(200).json("Logged out.")
+    } else {
+      res.status(401).json("Unauthorized action.")
+    }
+  } catch(error) {
+    console.log(error);
+  }
+  console.log(authorizedUser);
+
+});
 
 /*************** End Authentication Section ***********/
 

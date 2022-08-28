@@ -2,11 +2,23 @@ import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import UserContext from "../../Contexts/UserContext";
 import { Person } from "react-bootstrap-icons";
+import axios from 'axios';
 
 const UserAuth = () => {
-  const { user } = useContext(UserContext);
+  const { addCurrentUser,user } = useContext(UserContext);
+  if(user){
+    console.log(user._id)}
+  const handleClick = async () => {
+    try {
+      await axios.post("/auth/logout", {
+        userId: user._id,
+      });
+      addCurrentUser(null);
+    } catch(error) {
+      console.log(error);
+    }
 
-  const handleClick = () => {};
+  };
 
   if (user) {
     return (

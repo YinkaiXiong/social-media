@@ -3,7 +3,7 @@ import "../../assets/css/body/CreatePost.css";
 import TextareaAutosize from "react-textarea-autosize";
 import axios from "axios";
 import UserContext from "../../Contexts/UserContext";
-import { FileEarmarkImage, FileEarmarkImageFill } from "react-bootstrap-icons";
+import {ExclamationCircle, FileEarmarkImage, FileEarmarkImageFill} from "react-bootstrap-icons";
 import { useNavigate } from "react-router-dom";
 
 const CreatePost = () => {
@@ -13,6 +13,7 @@ const CreatePost = () => {
     postContent: "",
     imageFile: "",
   });
+  const [imgErrorMsg, setImgErrorMsg] = useState(null);
 
   const convertBase64 = (file, callback) => {
     const reader = new FileReader();
@@ -41,7 +42,14 @@ const CreatePost = () => {
     };
 
     if (name === "imageFile") {
-      convertBase64(files[0], setImageToFormData);
+      //Display error message when the file is larger than 5 MB
+      if(files[0].size > 5242880){
+        setImgErrorMsg('The file is too large. Limit: 5 MB');
+        event.target.value = null;
+      }else{
+        setImgErrorMsg(null);
+        convertBase64(files[0], setImageToFormData);
+      }
     } else if (name === "postContent") {
       setFormData((prevState) => {
         return {
@@ -51,8 +59,6 @@ const CreatePost = () => {
       });
     }
   };
-
-  console.log(formData);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -84,7 +90,6 @@ const CreatePost = () => {
       <div className="createPost-right">
         <form onSubmit={handleSubmit}>
           <div className="createPost-right-top">
-            {/* <textarea placeholder={"Want to share something?"}></textarea> */}
             <TextareaAutosize
               placeholder="Want to share something?"
               rows={4}
@@ -95,6 +100,12 @@ const CreatePost = () => {
             />
           </div>
           <div className="dividing-line"></div>
+          <div style={{color:"#fecc00"}}>
+            {
+              //Display error message when the file is larger than 5 MB
+              !imgErrorMsg ? "" : <div><ExclamationCircle /> {imgErrorMsg}</div>
+            }
+          </div>
           <div className="createPost-right-bot">
             <div className="createPost-input-container">
               <label htmlFor="img_upload" className="custom_img_upload">
@@ -102,7 +113,7 @@ const CreatePost = () => {
                   src="https://img.icons8.com/material-rounded/24/000000/upload--v1.png"
                   alt="Upload images"
                 />*/}
-                {formData.imageFile === "" ? (
+                {!formData.imageFile ? (
                   <FileEarmarkImage />
                 ) : (
                   <FileEarmarkImageFill />
