@@ -1,4 +1,4 @@
-.card-container{
+.card-container {
   min-width: 50%;
   max-width: 50%;
   height: auto;
@@ -10,13 +10,13 @@
   border-radius: 20px;
 }
 
-.containers{
+.containers {
   width: 90%;
   height: auto;
   margin: 0.1rem 0;
 }
 
-.card-top{
+.card-top {
   width: 90%;
   height: auto;
   margin-top: 1rem;
@@ -24,44 +24,48 @@
   display: flex;
 }
 
-.card-top-left{
-  width: 10%;
+.card-top-left {
+  width: 15%;
 }
 
-.card-avatar{
+.card-avatar {
   width: 50px;
   height: 50px;
 }
 
-.card-avatar img{
+.card-avatar img {
   max-width: 100%;
   max-height: 100%;
   border-radius: 20px;
 }
 
-.card-top-center{
-  width: 80%;
+.card-top-center {
+  width: 75%;
   display: flex;
   flex-direction: column;
   padding-left: 1rem;
+  border: 1px black solid;
 }
 
-.card-postUserName{
-  padding-top: 1rem;
+.card-postUserName {
 }
 
-.card-postUserName a{
+.card-postUserName a {
   text-decoration: none;
-  color: gray;
+  color: #06283d;
   font-size: 1.2rem;
 }
 
-.card-postUserName a:hover{
+.card-postUserName a:hover {
   text-decoration: underline;
-
 }
 
-.card-top-right{
+.card-postTime {
+  font-size: 1rem;
+  color: gray;
+}
+
+.card-top-right {
   width: 10%;
 }
 
@@ -69,7 +73,7 @@
   font-size: 1.2rem;
 }
 
-.card-content button{
+.card-content button {
   border: none;
   background-color: white;
   font-weight: 600;
@@ -78,23 +82,23 @@
   padding-left: 0.3rem;
 }
 
-.card-content button:hover{
+.card-content button:hover {
   text-decoration: underline;
 }
 
-.card-image-container img{
+.card-image-container img {
   max-width: 100%;
   max-height: 40vh;
   border-radius: 20px;
 }
 
-.card-btn-container{
+.card-btn-container {
   display: flex;
   flex-direction: row;
   align-items: center;
 }
 
-.card-btn{
+.card-btn {
   width: 50%;
   text-align: center;
   padding: 0.5rem;
@@ -103,20 +107,20 @@
   font-size: 1.1rem;
 }
 
-.card-btn:hover{
+.card-btn:hover {
   cursor: pointer;
   background-color: gainsboro;
 }
 
-.card-comment-container form{
-/*   border: 1px solid black; */
+.card-comment-container form {
+  /*   border: 1px solid black; */
   display: flex;
   flex-direction: row;
   justify-content: space-around;
   padding: 0.5rem 0;
 }
 
-.card-comment-container input{
+.card-comment-container input {
   padding: 0.5rem;
   width: 65%;
   border-radius: 10px;
@@ -124,12 +128,12 @@
   outline: none;
 }
 
-.card-comment-container button{
+.card-comment-container button {
   width: 25%;
   padding: 1rem;
   border-radius: 20px;
   border: none;
-  background-color: #1363DF;
+  background-color: #1363df;
   color: white;
   font-weight: 600;
   font-size: 0.5rem;

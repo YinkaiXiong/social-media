@@ -245,24 +245,22 @@ app.post("/auth/login", async (req, res) => {
 });
 
 //User Log out
-app.post("/auth/logout", (req,res)=>{
+app.post("/auth/logout", (req, res) => {
   try {
-    if(req.body.user === authorizedUser.userId) {
+    if (req.body.user === authorizedUser.userId) {
       authorizedUser = null;
-      req.logout((error)=>{
-        if(error){
+      req.logout((error) => {
+        if (error) {
           console.log(error);
         }
       });
-      res.status(200).json("Logged out.")
+      res.status(200).json("Logged out.");
     } else {
-      res.status(401).json("Unauthorized action.")
+      res.status(401).json("Unauthorized action.");
     }
-  } catch(error) {
+  } catch (error) {
     console.log(error);
   }
-  console.log(authorizedUser);
-
 });
 
 /*************** End Authentication Section ***********/
@@ -433,6 +431,33 @@ app.put("/posts/:id", async (req, res) => {
     } else {
       await post.updateOne({ $pull: { likes: req.body.userId } });
       res.status(200).json("Post disliked.");
+    }
+  } catch (error) {
+    res.status(500).json(error);
+  }
+});
+
+//Post timeline
+app.get("/posts/timeline/all", async (req, res) => {
+  try {
+    const response = await Post.find({});
+    if (!response) {
+      res.status(404).json("Not found.");
+    } else {
+      res.status(200).json(response);
+    }
+  } catch (error) {
+    res.status(500).json(error);
+  }
+});
+
+app.post("/posts/timeline/all", async (req, res) => {
+  try {
+    const response = await Post.find({ userId: req.body.userId });
+    if (!response) {
+      res.status(404).json("Not found.");
+    } else {
+      res.status(200).json(response);
     }
   } catch (error) {
     res.status(500).json(error);

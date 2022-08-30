@@ -35,12 +35,10 @@ const Login = () => {
         email: formData.email,
         password: formData.password,
       });
-      console.log(response);
 
       if (response.data.email === formData.email) {
         addCurrentUser(response.data);
         navigate("/", { replace: true });
-        console.log(user);
       }
     } catch (error) {
       console.log(error);

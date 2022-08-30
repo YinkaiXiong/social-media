@@ -84,3 +84,9 @@
   flex-direction: column;
   align-items: center;
 }
+
+.noPostMsg {
+  color: #06283d;
+  font-size: x-large;
+  margin-top: 5rem;
+}
