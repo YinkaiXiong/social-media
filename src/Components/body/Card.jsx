@@ -5,8 +5,10 @@ import {
   HandThumbsUp,
   HandThumbsUpFill,
   ChatLeftDots,
+  Trash3,
 } from "react-bootstrap-icons";
 import axios from "axios";
+import dateFormatter from "../../Utility/DateFormatter";
 
 const Card = (props) => {
   const [isLiked, setIsLiked] = useState(false);
@@ -51,9 +53,13 @@ const Card = (props) => {
             <div className="card-postUserName">
               <a href="/">{postUser.username}</a>
             </div>
-            <div className={"card-postTime"}>time</div>
+            <div className={"card-postTime"}>{dateFormatter(props.date)}</div>
           </div>
-          <div className="card-top-right"></div>
+          <div className="card-top-right">
+            <button>
+              <Trash3 />
+            </button>
+          </div>
         </div>
         <div className="card-content containers">
           <ReadMoreLess>{props.content}</ReadMoreLess>

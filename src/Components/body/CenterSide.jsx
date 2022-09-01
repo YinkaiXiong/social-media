@@ -30,6 +30,7 @@ const CenterSide = () => {
               postImage={post.imgURL}
               likes={post.likes}
               comments={post.comments}
+              date={post.createdAt}
             />
           );
         })}
