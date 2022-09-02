@@ -9,10 +9,12 @@ import {
 } from "react-bootstrap-icons";
 import axios from "axios";
 import dateFormatter from "../../Utility/DateFormatter";
+import {useLocation} from "react-router-dom";
 
 const Card = (props) => {
   const [isLiked, setIsLiked] = useState(false);
   const [postUser, setPostUser] = useState();
+  const location = useLocation();
 
   useEffect(() => {
     const fetchPostUser = async () => {
@@ -56,9 +58,10 @@ const Card = (props) => {
             <div className={"card-postTime"}>{dateFormatter(props.date)}</div>
           </div>
           <div className="card-top-right">
-            <button>
+            {location.pathname === "/Profile" && <button className={"card-deleteBtn"}>
               <Trash3 />
-            </button>
+            </button>}
+
           </div>
         </div>
         <div className="card-content containers">

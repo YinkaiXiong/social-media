@@ -78,63 +78,72 @@ const CreatePost = () => {
     }
   };
 
-  return (
-    <div className="createPost-container">
-      <div className="createPost-left">
-        <div className="createPost-avatar">
-          <a href={"/Profile"}>
-            <img src="/images/avatar_test.webp" alt="Avatar" />
-          </a>
+  if (!user) {
+    return <div>Loading</div>;
+  } else {
+    return (
+      <div className="createPost-container">
+        <div className="createPost-left">
+          <div className="createPost-avatar">
+            <a href={"/Profile"}>
+              <img
+                src={
+                  user.profilePicture === "" || user.profilePicture === undefined
+                    ? "/images/default_avatar.png"
+                    : user.profilePicture
+                }
+                alt="Avatar"
+                referrerPolicy="no-referrer"
+              />
+            </a>
+          </div>
         </div>
-      </div>
-      <div className="createPost-right">
-        <form onSubmit={handleSubmit}>
-          <div className="createPost-right-top">
-            <TextareaAutosize
-              placeholder="Want to share something?"
-              rows={4}
-              name={"postContent"}
-              value={formData.postContent}
-              onChange={handleChange}
-              required={true}
-            />
-          </div>
-          <div className="dividing-line"></div>
-          <div style={{color:"#fecc00"}}>
-            {
-              //Display error message when the file is larger than 5 MB
-              !imgErrorMsg ? "" : <div><ExclamationCircle /> {imgErrorMsg}</div>
-            }
-          </div>
-          <div className="createPost-right-bot">
-            <div className="createPost-input-container">
-              <label htmlFor="img_upload" className="custom_img_upload">
-                {/*<img
-                  src="https://img.icons8.com/material-rounded/24/000000/upload--v1.png"
-                  alt="Upload images"
-                />*/}
-                {!formData.imageFile ? (
-                  <FileEarmarkImage />
-                ) : (
-                  <FileEarmarkImageFill />
-                )}
-              </label>
-              <input
-                id="img_upload"
-                name={"imageFile"}
-                type="file"
-                accept=".png,.jpeg,.jpg,.webp"
+        <div className="createPost-right">
+          <form onSubmit={handleSubmit}>
+            <div className="createPost-right-top">
+              <TextareaAutosize
+                placeholder="Want to share something?"
+                rows={4}
+                name={"postContent"}
+                value={formData.postContent}
                 onChange={handleChange}
+                required={true}
               />
             </div>
-            <div className="createPost-button-container">
-              <button type="submit">Submit</button>
+            <div className="dividing-line"></div>
+            <div style={{color:"#fecc00"}}>
+              {
+                //Display error message when the file is larger than 5 MB
+                !imgErrorMsg ? "" : <div><ExclamationCircle /> {imgErrorMsg}</div>
+              }
             </div>
-          </div>
-        </form>
+            <div className="createPost-right-bot">
+              <div className="createPost-input-container">
+                <label htmlFor="img_upload" className="custom_img_upload">
+                  {!formData.imageFile ? (
+                    <FileEarmarkImage />
+                  ) : (
+                    <FileEarmarkImageFill />
+                  )}
+                </label>
+                <input
+                  id="img_upload"
+                  name={"imageFile"}
+                  type="file"
+                  accept=".png,.jpeg,.jpg,.webp"
+                  onChange={handleChange}
+                />
+              </div>
+              <div className="createPost-button-container">
+                <button type="submit">Submit</button>
+              </div>
+            </div>
+          </form>
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
+
 };
 
 export default CreatePost;

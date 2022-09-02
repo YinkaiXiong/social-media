@@ -2,6 +2,7 @@
   flex-grow: 1;
   max-width: 20%;
   min-width: 20%;
+  border: 1px black solid;
 }
 
 .left-side-container {
