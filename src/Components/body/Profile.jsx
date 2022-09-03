@@ -5,11 +5,13 @@ import Card from "./Card";
 import { Gear, House, Person } from "react-bootstrap-icons";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import Dialog from "./Dialog";
 
 const Profile = () => {
   const { addCurrentUser, user } = useContext(UserContext);
   const [avatarFile, setAvatarFile] = useState("");
   const [posts, setPosts] = useState([]);
+  const [displayDialog, setDisplayDialog] = useState(false);
   const navigate = useNavigate();
 
   //Check if the user is logged in, if not send to Log in page
@@ -84,6 +86,8 @@ const Profile = () => {
             userId={post.userId}
             content={post.postContent}
             postImage={post.imgURL}
+            date={post.createdAt}
+            dialog={setDisplayDialog}
           />
         );
       });
@@ -117,6 +121,7 @@ const Profile = () => {
           </div>
           <div className={"profile-userInfo"}>
             <h1>{user.username}</h1>
+            {/*TODO format the join time with dateFormatter */}
             <p>Joined in {user.createdAt.substring(0, 4)}</p>
             <div
               style={{
@@ -162,6 +167,7 @@ const Profile = () => {
           </div>
           <div className={"profile-posts-container"}>{displayPosts()}</div>
         </div>
+        {displayDialog && <Dialog dialog={setDisplayDialog}/>}
       </div>
     );
   }

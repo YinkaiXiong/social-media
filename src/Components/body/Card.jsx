@@ -58,7 +58,8 @@ const Card = (props) => {
             <div className={"card-postTime"}>{dateFormatter(props.date)}</div>
           </div>
           <div className="card-top-right">
-            {location.pathname === "/Profile" && <button className={"card-deleteBtn"}>
+            {location.pathname === "/Profile" && <button className={"card-deleteBtn"}
+            onClick={()=>{props.dialog(true)}}>
               <Trash3 />
             </button>}
 
