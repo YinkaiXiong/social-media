@@ -3,7 +3,11 @@ import "../../assets/css/body/CreatePost.css";
 import TextareaAutosize from "react-textarea-autosize";
 import axios from "axios";
 import UserContext from "../../Contexts/UserContext";
-import {ExclamationCircle, FileEarmarkImage, FileEarmarkImageFill} from "react-bootstrap-icons";
+import {
+  ExclamationCircle,
+  FileEarmarkImage,
+  FileEarmarkImageFill,
+} from "react-bootstrap-icons";
 import { useNavigate } from "react-router-dom";
 
 const CreatePost = () => {
@@ -43,10 +47,10 @@ const CreatePost = () => {
 
     if (name === "imageFile") {
       //Display error message when the file is larger than 5 MB
-      if(files[0].size > 5242880){
-        setImgErrorMsg('The file is too large. Limit: 5 MB');
+      if (files[0].size > 5242880) {
+        setImgErrorMsg("The file is too large. Limit: 5 MB");
         event.target.value = null;
-      }else{
+      } else {
         setImgErrorMsg(null);
         convertBase64(files[0], setImageToFormData);
       }
@@ -72,7 +76,7 @@ const CreatePost = () => {
         postContent: "",
         imageFile: "",
       });
-      navigate("/", { replace: true });
+      window.location.reload();
     } catch (error) {
       console.log(error);
     }
@@ -88,7 +92,8 @@ const CreatePost = () => {
             <a href={"/Profile"}>
               <img
                 src={
-                  user.profilePicture === "" || user.profilePicture === undefined
+                  user.profilePicture === "" ||
+                  user.profilePicture === undefined
                     ? "/images/default_avatar.png"
                     : user.profilePicture
                 }
@@ -111,10 +116,16 @@ const CreatePost = () => {
               />
             </div>
             <div className="dividing-line"></div>
-            <div style={{color:"#fecc00"}}>
+            <div style={{ color: "#fecc00" }}>
               {
                 //Display error message when the file is larger than 5 MB
-                !imgErrorMsg ? "" : <div><ExclamationCircle /> {imgErrorMsg}</div>
+                !imgErrorMsg ? (
+                  ""
+                ) : (
+                  <div>
+                    <ExclamationCircle /> {imgErrorMsg}
+                  </div>
+                )
               }
             </div>
             <div className="createPost-right-bot">
@@ -143,7 +154,6 @@ const CreatePost = () => {
       </div>
     );
   }
-
 };
 
 export default CreatePost;

@@ -12,6 +12,7 @@ const Profile = () => {
   const [avatarFile, setAvatarFile] = useState("");
   const [posts, setPosts] = useState([]);
   const [displayDialog, setDisplayDialog] = useState(false);
+  const [deletePostId, setDeletePostId] = useState();
   const navigate = useNavigate();
 
   //Check if the user is logged in, if not send to Log in page
@@ -82,16 +83,25 @@ const Profile = () => {
         return (
           <Card
             key={index}
-            id={post.id}
+            id={post._id}
             userId={post.userId}
             content={post.postContent}
             postImage={post.imgURL}
             date={post.createdAt}
             dialog={setDisplayDialog}
+            setDeletePostId={setDeletePostId}
           />
         );
       });
     }
+  };
+
+  const handleDelete = async () => {
+    //console.log(deletePostId);
+    const response = await axios.post(`/posts/${deletePostId}`, {
+      userId: user._id,
+    });
+    window.location.reload();
   };
 
   if (!user) {
@@ -167,7 +177,13 @@ const Profile = () => {
           </div>
           <div className={"profile-posts-container"}>{displayPosts()}</div>
         </div>
-        {displayDialog && <Dialog dialog={setDisplayDialog}/>}
+        {displayDialog && (
+          <Dialog
+            dialog={setDisplayDialog}
+            setDeletePostId={setDeletePostId}
+            handleDelete={handleDelete}
+          />
+        )}
       </div>
     );
   }

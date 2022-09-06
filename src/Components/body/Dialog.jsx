@@ -14,6 +14,8 @@ const Dialog = (props) => {
             className={"dialog-btn"}
             onClick={() => {
               console.log("delete");
+              props.handleDelete();
+              props.dialog(false);
             }}
           >
             Delete
@@ -22,6 +24,7 @@ const Dialog = (props) => {
             style={{ backgroundColor: "#cccccc" }}
             className={"dialog-btn"}
             onClick={() => {
+              props.setDeletePostId();
               props.dialog(false);
             }}
           >

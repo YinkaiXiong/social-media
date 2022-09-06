@@ -9,7 +9,7 @@ import {
 } from "react-bootstrap-icons";
 import axios from "axios";
 import dateFormatter from "../../Utility/DateFormatter";
-import {useLocation} from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 const Card = (props) => {
   const [isLiked, setIsLiked] = useState(false);
@@ -22,7 +22,7 @@ const Card = (props) => {
       setPostUser(result.data);
     };
     fetchPostUser();
-  }, []);
+  }, [props.userId]);
 
   const likeBtnHandle = () => {
     /*TODO ADD or REMOVE current user id to the post's likes array depends on isLiked*/
@@ -58,18 +58,25 @@ const Card = (props) => {
             <div className={"card-postTime"}>{dateFormatter(props.date)}</div>
           </div>
           <div className="card-top-right">
-            {location.pathname === "/Profile" && <button className={"card-deleteBtn"}
-            onClick={()=>{props.dialog(true)}}>
-              <Trash3 />
-            </button>}
-
+            {location.pathname === "/Profile" && (
+              <button
+                className={"card-deleteBtn"}
+                onClick={() => {
+                  //Display delete dialog and pass this post's id to Profile.jsx
+                  props.dialog(true);
+                  props.setDeletePostId(props.id);
+                }}
+              >
+                <Trash3 />
+              </button>
+            )}
           </div>
         </div>
         <div className="card-content containers">
           <ReadMoreLess>{props.content}</ReadMoreLess>
         </div>
         <div className="card-image-container containers">
-          <img src={props.postImage} alt="Post_Image"></img>
+          {props.postImage && <img src={props.postImage} alt="Post_Image" />}
         </div>
         <div className="dividing-line" style={{ width: "90%" }}></div>
         <div className="card-bot containers">

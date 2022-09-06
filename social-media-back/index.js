@@ -407,7 +407,7 @@ app.post("/posts/create", async (req, res) => {
 });
 
 //Delete a post
-app.delete("/posts/:id", async (req, res) => {
+app.post("/posts/:id", async (req, res) => {
   try {
     const post = await Post.findById(req.params.id);
     if (post.userId === req.body.userId) {
