@@ -46,13 +46,13 @@
   padding-left: 1rem;
 }
 
-.card-postUserName a {
+.card-postUserNameLink {
   text-decoration: none;
   color: #06283d;
   font-size: 1.2rem;
 }
 
-.card-postUserName a:hover {
+.card-postUserNameLink:hover {
   text-decoration: underline;
 }
 
@@ -68,7 +68,7 @@
   justify-content: center;
 }
 
-.card-deleteBtn{
+.card-deleteBtn {
   font-size: 1.2rem;
   border: none;
   border-radius: 20px;
@@ -78,11 +78,10 @@
   color: #06283d;
 }
 
-.card-deleteBtn:hover{
+.card-deleteBtn:hover {
   background-color: #d2d4d6;
   cursor: pointer;
 }
-
 
 .card-content {
   font-size: 1.2rem;

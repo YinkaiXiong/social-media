@@ -25,4 +25,14 @@ const dateFormatter = (postDate) => {
   }
 };
 
-export default dateFormatter;
+const postDateFormatter = (postDate) => {
+  const date = new Date(postDate);
+  return date.getFullYear();
+};
+
+module.exports = {
+  dateFormatter: dateFormatter,
+  postDateFormatter: postDateFormatter,
+};
+
+// export default dateFormatter;

@@ -3,9 +3,10 @@ import UserContext from "../../Contexts/UserContext";
 import "../../assets/css/body/Profile.css";
 import Card from "./Card";
 import { Gear, House, Person } from "react-bootstrap-icons";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import Dialog from "./Dialog";
+import { postDateFormatter } from "../../Utility/DateFormatter";
 
 const Profile = () => {
   const { addCurrentUser, user } = useContext(UserContext);
@@ -14,29 +15,46 @@ const Profile = () => {
   const [displayDialog, setDisplayDialog] = useState(false);
   const [deletePostId, setDeletePostId] = useState();
   const navigate = useNavigate();
+  const { userId } = useParams();
 
   //Check if the user is logged in, if not send to Log in page
   useEffect(() => {
     (async function fetchData() {
       try {
-        const response = await axios.get("/isAuth");
-        if (response) {
-          if (response.data === null) {
+        const userIsAuth = await axios.get("/isAuth");
+        if (userIsAuth) {
+          if (userIsAuth.data === null) {
             navigate("/LogIn", { replace: true });
           } else {
-            addCurrentUser(response.data);
-            //Fetch all posts created by the current user
-            const postsData = await axios.post("/posts/timeline/all", {
-              userId: response.data._id,
-            });
-            setPosts(postsData.data);
+            //If the url param userId exists, fetch the user by userId
+            //And add this user as the currentUser
+            if (userId) {
+              const user = await axios.get("/users/" + userId);
+              addCurrentUser(user.data);
+              //Fetch all posts created by the current user
+              const postsData = await axios.post("/posts/timeline/all", {
+                userId: user.data._id,
+              });
+              //Add user's posts
+              setPosts(postsData.data);
+            } else {
+              //If the userId param doesn't exist, it means currently
+              //visiting logged-in user's profile. Set the logged-in user
+              //as the current user
+              addCurrentUser(userIsAuth.data);
+              //Fetch all posts created by the current user
+              const postsData = await axios.post("/posts/timeline/all", {
+                userId: userIsAuth.data._id,
+              });
+              setPosts(postsData.data);
+            }
           }
         }
       } catch (error) {
         console.log(error);
       }
     })();
-  }, []);
+  }, [userId]);
 
   //When avatarFile changes, send the file to server and upload to DB
   useEffect(() => {
@@ -77,7 +95,11 @@ const Profile = () => {
   //Display post list. If no post created by the current user, display no post
   const displayPosts = () => {
     if (posts.length === 0) {
-      return <div className={"noPostMsg"}>You do not have any post.</div>;
+      return (
+        <div className={"noPostMsg"}>
+          This user has not create any post yet.
+        </div>
+      );
     } else {
       return posts.map((post, index) => {
         return (
@@ -131,8 +153,7 @@ const Profile = () => {
           </div>
           <div className={"profile-userInfo"}>
             <h1>{user.username}</h1>
-            {/*TODO format the join time with dateFormatter */}
-            <p>Joined in {user.createdAt.substring(0, 4)}</p>
+            <p>Joined in {postDateFormatter(user.createdAt)}</p>
             <div
               style={{
                 display: "flex",

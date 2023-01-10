@@ -17,6 +17,13 @@
   /*   border: white 1px solid; */
 }
 
+.logo {
+  font-size: 1.1em;
+  padding: 0.7em;
+  text-decoration: none;
+  font-weight: bolder;
+}
+
 .headerInput {
   display: flex;
   flex-direction: row;

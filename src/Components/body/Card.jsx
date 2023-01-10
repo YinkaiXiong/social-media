@@ -8,8 +8,8 @@ import {
   Trash3,
 } from "react-bootstrap-icons";
 import axios from "axios";
-import dateFormatter from "../../Utility/DateFormatter";
-import { useLocation } from "react-router-dom";
+import { dateFormatter } from "../../Utility/DateFormatter";
+import { Link, useLocation } from "react-router-dom";
 
 const Card = (props) => {
   const [isLiked, setIsLiked] = useState(false);
@@ -37,7 +37,7 @@ const Card = (props) => {
         <div className="card-top containers">
           <div className="card-top-left">
             <div className="card-avatar">
-              <a>
+              <Link to={"/Profile/" + postUser._id}>
                 <img
                   src={
                     postUser.profilePicture === "" ||
@@ -48,12 +48,17 @@ const Card = (props) => {
                   alt="Avatar"
                   referrerPolicy={"no-referrer"}
                 />
-              </a>
+              </Link>
             </div>
           </div>
           <div className="card-top-center">
             <div className="card-postUserName">
-              <a href="/">{postUser.username}</a>
+              <Link
+                to={"/Profile/" + postUser._id}
+                className={"card-postUserNameLink"}
+              >
+                {postUser.username}
+              </Link>
             </div>
             <div className={"card-postTime"}>{dateFormatter(props.date)}</div>
           </div>

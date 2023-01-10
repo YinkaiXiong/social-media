@@ -463,6 +463,13 @@ app.post("/posts/timeline/all", async (req, res) => {
     res.status(500).json(error);
   }
 });
+
+app.post("/posts/timeline/:userId", async (req, res) => {
+  try {
+  } catch (error) {
+    res.status(500).json(error);
+  }
+});
 /****************** End Post CRUD Section  ************/
 
 app.listen(8080, () => {

@@ -7,8 +7,8 @@ import { Link } from "react-router-dom";
 const Header = () => {
   return (
     <div className="header">
-      <Link className="grid-item" to={"/"}>
-        Logo
+      <Link className="grid-item logo" to={"/"}>
+        SocialMedia
       </Link>
       <div className="grid-item headerInput">
         <SearchBar />
