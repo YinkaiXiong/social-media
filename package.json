@@ -7,7 +7,7 @@
     "start": "node index.js",
     "build": "cd frontend && npm run build",
     "install-client": "cd frontend && npm install",
-    "railway-install": "npm run install-client && npm run build && npm install"
+    "railway-install": "npm install && npm run install-client && npm run build"
   },
   "author": "",
   "license": "ISC",
