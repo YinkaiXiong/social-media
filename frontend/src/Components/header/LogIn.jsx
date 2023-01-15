@@ -12,7 +12,7 @@ const initialFormState = {
 
 const Login = () => {
   const navigate = useNavigate();
-  const { addCurrentUser, user } = useContext(UserContext);
+  const { addCurrentUser } = useContext(UserContext);
 
   const [errorMessage, setErrorMessage] = useState(null);
 

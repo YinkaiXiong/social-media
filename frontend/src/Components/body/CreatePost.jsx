@@ -11,7 +11,7 @@ import {
 import { useNavigate } from "react-router-dom";
 
 const CreatePost = () => {
-  const navigate = useNavigate();
+  //const navigate = useNavigate();
   const { user } = useContext(UserContext);
   const [formData, setFormData] = useState({
     postContent: "",

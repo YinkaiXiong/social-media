@@ -8,7 +8,7 @@ import UserContext from "../../Contexts/UserContext";
 
 const SignUp = () => {
   const navigate = useNavigate();
-  const { addCurrentUser, user } = useContext(UserContext);
+  const { addCurrentUser } = useContext(UserContext);
 
   const [formData, setFormData] = useState({
     username: "",
