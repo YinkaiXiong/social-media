@@ -11,6 +11,7 @@ import axios from "axios";
 import { dateFormatter } from "../../Utility/DateFormatter";
 import { Link, useLocation } from "react-router-dom";
 import UserContext from "../../Contexts/UserContext";
+import instance from "../../Utility/axios";
 
 const Card = (props) => {
   const [isLiked, setIsLiked] = useState(false);
@@ -25,7 +26,7 @@ const Card = (props) => {
 
   useEffect(() => {
     const fetchPostUser = async () => {
-      const result = await axios(`http://localhost:8080/users/${props.userId}`);
+      const result = await instance.get(`/users/${props.userId}`);
       setPostUser(result.data);
     };
     fetchPostUser();

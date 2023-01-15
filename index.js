@@ -88,7 +88,7 @@ passport.use(
     {
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      callbackURL: "http://localhost:8080/auth/google/callback",
+      callbackURL: process.env.BACKEND_URL + "/auth/google/callback",
       userProfileURL: "https://www.googleapis.com/oauth2/v3/userinfo",
     },
     async function (accessToken, refreshToken, profile, cb) {
@@ -131,14 +131,14 @@ app.get(
         authorizedUser = data;
       }
     });
-    res.redirect("http://localhost:3000");
+    res.redirect(process.env.FRONTEND_URL);
   }
 );
 
 app.get("/auth/failed", (req, res) => {
   res
     .json("OAuth authentication failed.")
-    .redirect("http://localhost:3000/LogIn");
+    .redirect(`${process.env.FRONTEND_URL}/LogIn`);
 });
 
 /************  Facebook Authentication ***************/
@@ -147,7 +147,7 @@ passport.use(
     {
       clientID: process.env.FACEBOOK_APP_ID,
       clientSecret: process.env.FACEBOOK_APP_SECRET,
-      callbackURL: "http://localhost:8080/auth/facebook/callback",
+      callbackURL: process.env.BACKEND_URL + "/auth/facebook/callback",
       profileFields: ["id", "emails", "name", "picture.type(large)"],
     },
     async function (accessToken, refreshToken, profile, cb) {
@@ -191,7 +191,7 @@ app.get(
         authorizedUser = data;
       }
     });
-    res.redirect("http://localhost:3000");
+    res.redirect(`${process.env.FRONTEND_URL}`);
   }
 );
 

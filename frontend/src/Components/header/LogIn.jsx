@@ -99,7 +99,7 @@ const Login = () => {
             <div className="oauthBtn-container">
               <div className="oauthBtns btn-google">
                 {/* Unable to use axios to perform google authentication due to the CORS policy  */}
-                <a href="http://localhost:8080/auth/google">
+                <a href="https://social-media-production-30d3.up.railway.app/auth/google">
                   <img
                     src="https://img.icons8.com/color/48/000000/google-logo.png"
                     alt="Login with Google"
@@ -108,7 +108,7 @@ const Login = () => {
               </div>
 
               <div className="oauthBtns btn-facebook">
-                <a href="http://localhost:8080/auth/facebook">
+                <a href="https://social-media-production-30d3.up.railway.app/auth/facebook">
                   <img
                     src="https://img.icons8.com/color/48/000000/facebook-new.png"
                     alt="Login with Facebook"
