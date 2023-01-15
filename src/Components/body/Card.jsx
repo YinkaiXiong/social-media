@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "../../assets/css/body/Card.css";
 import ReadMoreLess from "./ReadMoreLess";
 import {
@@ -10,11 +10,18 @@ import {
 import axios from "axios";
 import { dateFormatter } from "../../Utility/DateFormatter";
 import { Link, useLocation } from "react-router-dom";
+import UserContext from "../../Contexts/UserContext";
 
 const Card = (props) => {
   const [isLiked, setIsLiked] = useState(false);
+  const [likeNum, setLikeNum] = useState(props.likes.length);
   const [postUser, setPostUser] = useState();
   const location = useLocation();
+  const { user: authUser } = useContext(UserContext);
+
+  useEffect(() => {
+    setIsLiked(props.likes.includes(authUser._id));
+  }, [authUser._id, props.likes]);
 
   useEffect(() => {
     const fetchPostUser = async () => {
@@ -26,6 +33,11 @@ const Card = (props) => {
 
   const likeBtnHandle = () => {
     /*TODO ADD or REMOVE current user id to the post's likes array depends on isLiked*/
+    //console.log(authUser);
+    try {
+      axios.put("/posts/" + props.id, { userId: authUser._id });
+    } catch (error) {}
+    setLikeNum(isLiked ? likeNum - 1 : likeNum + 1);
     setIsLiked(!isLiked);
   };
 
@@ -89,6 +101,7 @@ const Card = (props) => {
             <div onClick={likeBtnHandle} className="card-btn card-btn-like">
               {isLiked ? <HandThumbsUpFill /> : <HandThumbsUp />}
               Like
+              <span> {likeNum}</span>
             </div>
             <div className="card-btn card-btn-comment">
               <ChatLeftDots />

@@ -109,6 +109,7 @@ const Profile = () => {
             userId={post.userId}
             content={post.postContent}
             postImage={post.imgURL}
+            likes={post.likes}
             date={post.createdAt}
             dialog={setDisplayDialog}
             setDeletePostId={setDeletePostId}
@@ -120,7 +121,7 @@ const Profile = () => {
 
   const handleDelete = async () => {
     //console.log(deletePostId);
-    const response = await axios.post(`/posts/${deletePostId}`, {
+    await axios.post(`/posts/${deletePostId}`, {
       userId: user._id,
     });
     window.location.reload();

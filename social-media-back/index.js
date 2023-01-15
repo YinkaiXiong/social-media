@@ -464,6 +464,7 @@ app.post("/posts/timeline/all", async (req, res) => {
   }
 });
 
+//Get all post from a user
 app.post("/posts/timeline/:userId", async (req, res) => {
   try {
   } catch (error) {
