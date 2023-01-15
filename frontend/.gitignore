@@ -10,6 +10,7 @@
 
 # production
 /build
+./frondend/build
 
 # misc
 .DS_Store

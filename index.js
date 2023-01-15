@@ -33,9 +33,9 @@ app.use(bodyParser.json({ limit: "6mb" }));
 app.use(cors());
 app.use(express.static("public"));
 
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static("./frontend/build"));
-}
+//if (process.env.NODE_ENV === "production") {
+app.use(express.static("./frontend/build"));
+//}
 
 // use passport, session
 app.use(
@@ -478,11 +478,11 @@ app.post("/posts/timeline/:userId", async (req, res) => {
 });
 /****************** End Post CRUD Section  ************/
 
-if (process.env.NODE_ENV === "production") {
-  app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "./frontend/build", "index.html"));
-  });
-}
+//if (process.env.NODE_ENV === "production") {
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "./frontend/build", "index.html"));
+});
+//}
 
 app.listen(8080, () => {
   console.log("Server started on 8080");
