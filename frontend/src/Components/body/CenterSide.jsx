@@ -2,13 +2,13 @@ import React, { useEffect, useState } from "react";
 import "../../assets/css/body/CenterSide.css";
 import CreatePost from "./CreatePost";
 import Card from "./Card";
-import axios from "axios";
+import instance from "../../Utility/axios";
 
 const CenterSide = () => {
   const [posts, setPosts] = useState();
   useEffect(() => {
     const fetchPosts = async () => {
-      const response = await axios("/posts/timeline/all");
+      const response = await instance.get("/posts/timeline/all");
       setPosts(response.data);
     };
     fetchPosts();

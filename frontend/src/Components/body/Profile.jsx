@@ -4,9 +4,9 @@ import "../../assets/css/body/Profile.css";
 import Card from "./Card";
 import { Gear, House, Person } from "react-bootstrap-icons";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import axios from "axios";
 import Dialog from "./Dialog";
 import { postDateFormatter } from "../../Utility/DateFormatter";
+import instance from "../../Utility/axios";
 
 const Profile = () => {
   const { addCurrentUser, user } = useContext(UserContext);
@@ -21,7 +21,7 @@ const Profile = () => {
   useEffect(() => {
     (async function fetchData() {
       try {
-        const userIsAuth = await axios.get("/isAuth");
+        const userIsAuth = await instance.get("/isAuth");
         if (userIsAuth) {
           if (userIsAuth.data === null) {
             navigate("/LogIn", { replace: true });
@@ -29,10 +29,10 @@ const Profile = () => {
             //If the url param userId exists, fetch the user by userId
             //And add this user as the currentUser
             if (userId) {
-              const user = await axios.get("/users/" + userId);
+              const user = await instance.get("/users/" + userId);
               addCurrentUser(user.data);
               //Fetch all posts created by the current user
-              const postsData = await axios.post("/posts/timeline/all", {
+              const postsData = await instance.post("/posts/timeline/all", {
                 userId: user.data._id,
               });
               //Add user's posts
@@ -43,7 +43,7 @@ const Profile = () => {
               //as the current user
               addCurrentUser(userIsAuth.data);
               //Fetch all posts created by the current user
-              const postsData = await axios.post("/posts/timeline/all", {
+              const postsData = await instance.post("/posts/timeline/all", {
                 userId: userIsAuth.data._id,
               });
               setPosts(postsData.data);
@@ -61,7 +61,7 @@ const Profile = () => {
     if (avatarFile !== "") {
       (async () => {
         try {
-          const response = await axios.post("/users/updateAvatar", {
+          const response = await instance.post("/users/updateAvatar", {
             userId: user._id,
             avatarFile: avatarFile,
           });
@@ -121,7 +121,7 @@ const Profile = () => {
 
   const handleDelete = async () => {
     //console.log(deletePostId);
-    await axios.post(`/posts/${deletePostId}`, {
+    await instance.post(`/posts/${deletePostId}`, {
       userId: user._id,
     });
     window.location.reload();

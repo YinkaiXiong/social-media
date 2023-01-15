@@ -1,9 +1,9 @@
 import React, { useState, useContext } from "react";
 import "../../assets/css/header/LoginandSignup.css";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import UserContext from "../../Contexts/UserContext";
 import { ExclamationCircle } from "react-bootstrap-icons";
+import instance from "../../Utility/axios";
 
 const initialFormState = {
   email: "",
@@ -31,7 +31,7 @@ const Login = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await axios.post("/auth/login", {
+      const response = await instance.post("/auth/login", {
         email: formData.email,
         password: formData.password,
       });

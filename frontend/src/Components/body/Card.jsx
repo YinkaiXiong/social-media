@@ -7,7 +7,6 @@ import {
   ChatLeftDots,
   Trash3,
 } from "react-bootstrap-icons";
-import axios from "axios";
 import { dateFormatter } from "../../Utility/DateFormatter";
 import { Link, useLocation } from "react-router-dom";
 import UserContext from "../../Contexts/UserContext";
@@ -36,7 +35,7 @@ const Card = (props) => {
     /*TODO ADD or REMOVE current user id to the post's likes array depends on isLiked*/
     //console.log(authUser);
     try {
-      axios.put("/posts/" + props.id, { userId: authUser._id });
+      instance.put("/posts/" + props.id, { userId: authUser._id });
     } catch (error) {}
     setLikeNum(isLiked ? likeNum - 1 : likeNum + 1);
     setIsLiked(!isLiked);

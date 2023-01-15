@@ -1,10 +1,10 @@
 import React, { useState, useContext } from "react";
 import "../../assets/css/header/LoginandSignup.css";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { ExclamationCircle } from "react-bootstrap-icons";
 
 import UserContext from "../../Contexts/UserContext";
+import instance from "../../Utility/axios";
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -32,7 +32,7 @@ const SignUp = () => {
     event.preventDefault();
 
     try {
-      const response = await axios.post("/auth/register", {
+      const response = await instance.post("/auth/register", {
         username: formData.username,
         email: formData.email,
         password: formData.password,

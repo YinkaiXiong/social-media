@@ -2,14 +2,14 @@ import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import UserContext from "../../Contexts/UserContext";
 import { Person } from "react-bootstrap-icons";
-import axios from "axios";
+import instance from "../../Utility/axios";
 
 const UserAuth = () => {
   const { addCurrentUser, user } = useContext(UserContext);
 
   const handleClick = async () => {
     try {
-      await axios.post("/auth/logout", {
+      await instance.post("/auth/logout", {
         userId: user._id,
       });
       addCurrentUser(null);

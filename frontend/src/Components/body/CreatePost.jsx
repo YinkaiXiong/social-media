@@ -1,7 +1,6 @@
 import React, { useContext, useState } from "react";
 import "../../assets/css/body/CreatePost.css";
 import TextareaAutosize from "react-textarea-autosize";
-import axios from "axios";
 import UserContext from "../../Contexts/UserContext";
 import {
   ExclamationCircle,
@@ -9,6 +8,7 @@ import {
   FileEarmarkImageFill,
 } from "react-bootstrap-icons";
 import { useNavigate } from "react-router-dom";
+import instance from "../../Utility/axios";
 
 const CreatePost = () => {
   //const navigate = useNavigate();
@@ -67,7 +67,7 @@ const CreatePost = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      await axios.post("/posts/create", {
+      await instance.post("/posts/create", {
         userId: user._id,
         postContent: formData.postContent,
         imageFile: formData.imageFile,

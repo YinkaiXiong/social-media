@@ -1,10 +1,10 @@
 import { useContext, useEffect } from "react";
-import axios from "axios";
 import LeftSide from "./body/LeftSide";
 import CenterSide from "./body/CenterSide";
 import RightSide from "./body/RightSide";
 import { useNavigate } from "react-router-dom";
 import UserContext from "../Contexts/UserContext";
+import instance from "../Utility/axios";
 
 const Home = () => {
   const { addCurrentUser } = useContext(UserContext);
@@ -13,7 +13,7 @@ const Home = () => {
   //Check if the user is logged in, if not send to Log in page
   useEffect(() => {
     (async function fetchData() {
-      const response = await axios.get("/isAuth");
+      const response = await instance.get("/isAuth");
       if (response) {
         if (response.data === null) {
           navigate("/LogIn", { replace: true });
