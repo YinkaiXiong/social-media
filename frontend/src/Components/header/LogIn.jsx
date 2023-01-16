@@ -74,7 +74,7 @@ const Login = () => {
                 type={"email"}
                 placeholder={"Enter Your Email"}
                 name={"email"}
-                value={formData.email}
+                value={"john@test.com"}
                 onChange={handleChange}
                 required
               />
@@ -85,7 +85,7 @@ const Login = () => {
                 type={"password"}
                 placeholder={"Enter Your Password"}
                 name={"password"}
-                value={formData.password}
+                value={"123456"}
                 onChange={handleChange}
                 required
               />
@@ -99,7 +99,7 @@ const Login = () => {
             <div className="oauthBtn-container">
               <div className="oauthBtns btn-google">
                 {/* Unable to use axios to perform google authentication due to the CORS policy  */}
-                <a href="https://social-media-production-30d3.up.railway.app/auth/google">
+                <a href="https://social-media-i2xm.onrender.com/auth/google">
                   <img
                     src="https://img.icons8.com/color/48/000000/google-logo.png"
                     alt="Login with Google"
@@ -108,7 +108,7 @@ const Login = () => {
               </div>
 
               <div className="oauthBtns btn-facebook">
-                <a href="https://social-media-production-30d3.up.railway.app/auth/facebook">
+                <a href="https://social-media-i2xm.onrender.com/auth/facebook">
                   <img
                     src="https://img.icons8.com/color/48/000000/facebook-new.png"
                     alt="Login with Facebook"
