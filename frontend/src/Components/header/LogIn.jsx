@@ -6,8 +6,8 @@ import { ExclamationCircle } from "react-bootstrap-icons";
 import instance from "../../Utility/axios";
 
 const initialFormState = {
-  email: "",
-  password: "",
+  email: "john@test.com",
+  password: "123456",
 };
 
 const Login = () => {
@@ -74,7 +74,7 @@ const Login = () => {
                 type={"email"}
                 placeholder={"Enter Your Email"}
                 name={"email"}
-                value={"john@test.com"}
+                value={formData.email}
                 onChange={handleChange}
                 required
               />
@@ -85,7 +85,7 @@ const Login = () => {
                 type={"password"}
                 placeholder={"Enter Your Password"}
                 name={"password"}
-                value={"123456"}
+                value={formData.password}
                 onChange={handleChange}
                 required
               />
