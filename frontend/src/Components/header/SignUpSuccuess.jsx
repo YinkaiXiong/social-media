@@ -11,7 +11,7 @@ const SignUpSuccess = () => {
       <div className="SignUpSuccess-content">
         <div className="SignUpSuccess-Heading">You signed up successfully</div>
         <div className="SignUpSuccess-Message">
-          Thank you for sign up to Social Media.
+          Thank you for sign up to Zone Media.
           <a href="/">Click here to back to home page</a>
         </div>
       </div>

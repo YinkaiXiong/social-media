@@ -8,7 +8,7 @@ const Header = () => {
   return (
     <div className="header">
       <Link className="grid-item logo" to={"/"}>
-        SocialMedia
+        ZoneMedia
       </Link>
       <div className="grid-item headerInput">
         <SearchBar />
