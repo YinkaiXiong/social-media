@@ -15,6 +15,7 @@ const RightSide = () => {
               id={friend.userId}
               user={friend.username}
               userAvatar={friend.user_avatar}
+              userUrl={friend.userURL}
             />
           );
         })}
